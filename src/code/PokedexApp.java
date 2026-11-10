@@ -18,10 +18,14 @@ public class PokedexApp {
             System.out.println("Put pokemon.csv in the project root (working directory).");
             return;
         }
+        
+        // Check 1
+        Pokemon first = new Pokemon (25, "pikachu", 4, 68, 112);
+        Pokemon second = new Pokemon (25, "Pikachu", 4, 68, 112);
 
         Scanner input = new Scanner(System.in);
         boolean running = true;
-        while (running && input.hasNextLine()) {
+        while (running) {
             System.out.println("\n1. Search\n2. Add/update\n3. Remove\n4. Show buckets\n0. Exit");
             System.out.print("Choice: ");
             String choice = input.nextLine().trim();
@@ -38,13 +42,40 @@ public class PokedexApp {
 
     private static void searchPokemon(Scanner input) {
         // TODO 1: Complete this menu action.
-        System.out.println("TODO: complete this action");
+    	
+        System.out.println("Enter Pokemon you're searcing for");
+        String name = input.nextLine();
+        
+        Pokemon pokeLookFor = pokedex.get(name);
+        if (pokedex.get(name) !=null)
+        	System.out.println(pokeLookFor);
+        else
+        	System.out.println("Did not find Pokemon with that name " + name);	
     }
 
     private static void addOrUpdatePokemon(Scanner input) {
         // TODO 2: Complete this menu action.
-        System.out.println("TODO: complete this action");
-    }
+        System.out.println("Enter Pokemon name you want to add or update");
+        	String name = input.nextLine();
+        	
+        	//System.out.println("Enter height in decimeters");
+        	int id = readNonNegativeInt(input, "Enter the id for Pokemon");
+        	int height = readNonNegativeInt(input, "Enter height in decimeters" );
+        	int weight = readNonNegativeInt(input, "Enter weight in decimeters" );
+        	int baseExperience = readNonNegativeInt(input,"Enter experience level");
+        	
+        	Pokemon newPokemon = new Pokemon (id, name, height, weight, baseExperience);
+        	
+        	if(pokedex.get(name) != null) {
+        		// This means the Pokemon is already in the hash table
+        		// Will need to be updates
+        		System.out.println("Updating Pokemon now");
+        	} else {
+        		System.out.println("Inserting Pokemon now");
+        		
+        	}
+        		pokedex.insert(name, newPokemon); // If it exists it will be overwritten
+      }	
 
     private static void removePokemon(Scanner input) {
         // TODO 3: Complete this menu action.
@@ -60,6 +91,7 @@ public class PokedexApp {
                 if (value >= 0) { return value; }
             } catch (NumberFormatException e) {
                 // Explain the error and ask again.
+            	System.out.println("You entered a negative number, only positive numbers please");
             }
             System.out.println("Enter a whole number of zero or more.");
         }
