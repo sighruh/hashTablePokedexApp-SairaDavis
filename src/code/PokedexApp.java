@@ -43,26 +43,25 @@ public class PokedexApp {
     private static void searchPokemon(Scanner input) {
         // TODO 1: Complete this menu action.
     	
-        System.out.println("Enter Pokemon you're searcing for");
-        String name = input.nextLine();
+        System.out.println("Enter Pokemon you're searching for: ");
+        String name = PokemonLoader.normalizeName(input.nextLine()); // Changed line to trim and change entered name to lowercase
         
         Pokemon pokeLookFor = pokedex.get(name);
         if (pokedex.get(name) !=null)
         	System.out.println(pokeLookFor);
         else
-        	System.out.println("Did not find Pokemon with that name " + name);	
+        	System.out.println("Did not find Pokemon with the " + name);	
     }
 
     private static void addOrUpdatePokemon(Scanner input) {
         // TODO 2: Complete this menu action.
-        System.out.println("Enter Pokemon name you want to add or update");
-        	String name = input.nextLine();
+        System.out.println("Enter Pokemon name you want to add or update: ");
+        String name = PokemonLoader.normalizeName(input.nextLine()); // Changed line to trim and change entered name to lowercase
         	
-        	//System.out.println("Enter height in decimeters");
-        	int id = readNonNegativeInt(input, "Enter the id for Pokemon");
-        	int height = readNonNegativeInt(input, "Enter height in decimeters" );
-        	int weight = readNonNegativeInt(input, "Enter weight in decimeters" );
-        	int baseExperience = readNonNegativeInt(input,"Enter experience level");
+        	int id = readNonNegativeInt(input, "Enter the id for Pokemon: ");
+        	int height = readNonNegativeInt(input, "Enter height in decimeters: " );
+        	int weight = readNonNegativeInt(input, "Enter weight in hectograms: " );
+        	int baseExperience = readNonNegativeInt(input,"Enter experience level: ");
         	
         	Pokemon newPokemon = new Pokemon (id, name, height, weight, baseExperience);
         	
@@ -80,6 +79,7 @@ public class PokedexApp {
     private static void removePokemon(Scanner input) {
         // TODO 3: Complete this menu action.
         System.out.println("TODO: complete this action");
+        String name = PokemonLoader.normalizeName(input.nextLine()); // Changed line to trim and change entered name to lowercase
     }
 
     // Provided: reads a non-negative integer using nextLine(), avoiding leftover newlines.
@@ -91,7 +91,7 @@ public class PokedexApp {
                 if (value >= 0) { return value; }
             } catch (NumberFormatException e) {
                 // Explain the error and ask again.
-            	System.out.println("You entered a negative number, only positive numbers please");
+            	System.out.println("That wasn't a whole number, only positive numbers please");
             }
             System.out.println("Enter a whole number of zero or more.");
         }
