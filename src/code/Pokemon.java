@@ -34,9 +34,10 @@ public class Pokemon {
     }
     
     public void setName(String name) {
-    	if (name == null || name == "")
+    	// setName() rejects null or blank names and stores a trimmed, lowercase name
+    	if (name == null || name.isBlank())
     		return;
-		this.name = name;
+		this.name = name.trim();
 	}
 
 	public int getHeightDm() {
@@ -54,7 +55,7 @@ public class Pokemon {
 	}
 
 	public void setWeightHg(int weightHg) {
-		if (weightHg <= 0)
+		if (weightHg < 0)
 			return;
 		this.weightHg = weightHg;
 	}
@@ -64,7 +65,7 @@ public class Pokemon {
 	}
 
 	public void setBaseExperience(int baseExperience) {
-		if(baseExperience <= 0)
+		if(baseExperience < 0)
 			return;
 		this.baseExperience = baseExperience;
 	}

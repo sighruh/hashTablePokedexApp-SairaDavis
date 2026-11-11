@@ -22,6 +22,8 @@ public class PokedexApp {
         // Check 1
         Pokemon first = new Pokemon (25, "pikachu", 4, 68, 112);
         Pokemon second = new Pokemon (25, "Pikachu", 4, 68, 112);
+        
+        System.out.println("check equality " + first.equals(second));
 
         Scanner input = new Scanner(System.in);
         boolean running = true;
@@ -78,8 +80,14 @@ public class PokedexApp {
 
     private static void removePokemon(Scanner input) {
         // TODO 3: Complete this menu action.
-        System.out.println("TODO: complete this action");
+        System.out.println("Enter Pokemon name you want to remove: ");
         String name = PokemonLoader.normalizeName(input.nextLine()); // Changed line to trim and change entered name to lowercase
+    
+        if (pokedex.remove(name)) {
+        	System.out.println(name + " was removed");
+        } else {
+        	System.out.println(name + " was not found");
+        }
     }
 
     // Provided: reads a non-negative integer using nextLine(), avoiding leftover newlines.
